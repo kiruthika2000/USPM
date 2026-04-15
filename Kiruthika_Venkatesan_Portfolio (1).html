@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kiruthika Venkatesan — Technical Product Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #080e1c;
+    --navy2: #0d1526;
+    --navy3: #111d35;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --gold-glow: rgba(201,168,76,0.08);
+    --white: #f4f1eb;
+    --muted: #8a93a8;
+    --border: rgba(201,168,76,0.18);
+    --card: rgba(255,255,255,0.03);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 64px;
+    background: rgba(8,14,28,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold) !important;
+    padding: 6px 18px;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+  }
+
+  /* ── SECTIONS COMMON ── */
+  section { position: relative; z-index: 1; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 0 6rem;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(24,95,165,0.08) 0%, transparent 60%),
+      var(--navy);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    margin-bottom: 0.3rem;
+    color: var(--white);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-role {
+    font-size: 1.05rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin: 1.5rem 0 2rem;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-role strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 12px 28px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    padding: 12px 28px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(244,241,235,0.2);
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* HERO STATS */
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    min-width: 130px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold-glow);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .stat-card:hover { border-color: var(--gold); }
+  .stat-card:hover::before { opacity: 1; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 7rem 0;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--navy2) 100%);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  h2 em { color: var(--gold); font-style: italic; }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .about-text p strong { color: var(--white); font-weight: 500; }
+
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.2s;
+  }
+
+  .highlight-item:hover { border-color: var(--gold); }
+
+  .hi-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--gold-dim);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .hi-text strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .hi-text span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience {
+    padding: 7rem 0;
+    background: var(--navy2);
+  }
+
+  .timeline {
+    margin-top: 3rem;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold) 0%, rgba(201,168,76,0.1) 100%);
+  }
+
+  .tl-item {
+    position: relative;
+    padding-bottom: 3.5rem;
+    padding-left: 2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.15);
+  }
+
+  .tl-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tl-date {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-dim);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  .tl-company {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .tl-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .tl-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .tl-bullets li {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .tl-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.65rem;
+    top: 5px;
+  }
+
+  .tl-bullets li strong { color: var(--white); font-weight: 500; }
+
+  .tl-metrics {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .metric-chip {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.25);
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── PROJECTS ── */
+  #projects {
+    padding: 7rem 0;
+    background: var(--navy3);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s, transform 0.5s, border-color 0.3s;
+  }
+
+  .project-card.visible { opacity: 1; transform: translateY(0); }
+
+  .project-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover::after { opacity: 1; }
+
+  .proj-tag {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .proj-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .proj-desc {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
+  }
+
+  .proj-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+  }
+
+  .stack-pill {
+    font-size: 0.65rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    border: 1px solid rgba(138,147,168,0.2);
+    padding: 3px 9px;
+    border-radius: 2px;
+  }
+
+  .proj-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .res-item {
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .res-item::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .res-item strong { color: var(--gold-light); font-weight: 600; }
+
+  /* ── SKILLS ── */
+  #skills {
+    padding: 7rem 0;
+    background: var(--navy2);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .skill-group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+
+  .skill-group.visible { opacity: 1; transform: translateY(0); }
+
+  .sg-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-pill {
+    font-size: 0.73rem;
+    font-weight: 400;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(138,147,168,0.15);
+    padding: 4px 10px;
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+
+  .skill-pill:hover {
+    color: var(--gold);
+    border-color: rgba(201,168,76,0.4);
+    background: var(--gold-dim);
+  }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications {
+    padding: 7rem 0;
+    background: var(--navy3);
+  }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+
+
+
+  /* ── EDUCATION ── */
+  #education {
+    padding: 5rem 0;
+    background: var(--navy2);
+  }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.75rem 2rem;
+    transition: border-color 0.2s;
+  }
+
+  .edu-card:hover { border-color: var(--gold); }
+
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+
+  .edu-meta {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .edu-gpa {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    background: var(--gold-dim);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 7rem 0;
+    background: var(--navy);
+    background-image: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    text-align: center;
+  }
+
+  #contact h2 { margin-bottom: 1rem; }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+  }
+
+  .contact-link:hover {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: var(--gold-dim);
+  }
+
+  .contact-link svg { width: 16px; height: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--navy);
+    position: relative;
+    z-index: 1;
+  }
+
+  footer span { color: var(--gold); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-content h1 { animation-delay: 0.25s; }
+  .hero-role { animation-delay: 0.35s; }
+  .hero-desc { animation-delay: 0.45s; }
+  .hero-btns { animation-delay: 0.55s; }
+
+  .hero-stats .stat-card {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .hero-stats .stat-card:nth-child(1) { animation-delay: 0.4s; }
+  .hero-stats .stat-card:nth-child(2) { animation-delay: 0.52s; }
+  .hero-stats .stat-card:nth-child(3) { animation-delay: 0.64s; }
+  .hero-stats .stat-card:nth-child(4) { animation-delay: 0.76s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-stats { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    h1 { font-size: 2.8rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr; }
+  }
+
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">K. Venkatesan</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          Technical Product Manager
+
+        </div>
+        <h1>Kiruthika<br><em>Venkatesan</em></h1>
+        <p class="hero-role">
+          <strong>Developer Experience &amp; Enterprise Platform</strong> — 5+ years driving<br>
+          SDLC delivery, OKR-aligned roadmaps &amp; developer productivity at scale.
+        </p>
+        <p class="hero-desc">
+          Building the platforms that make engineering teams faster. Specialized in technical product strategy for Fortune 500 financial services clients across matrixed, high-stakes environments.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-primary">View My Work →</a>
+          <a href="#contact" class="btn-ghost">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-num" style="font-size:2rem;">5+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" data-target="12">0</span>
+          <span class="stat-label">F500 Clients</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" data-target="84">0</span>
+          <span class="stat-label">% Client Adoption</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num" data-target="75">0</span>
+          <span class="stat-label">B+ Daily Transactions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label">About Me</div>
+        <h2>Building <em>platforms</em> that make developers move faster</h2>
+        <p>I'm a <strong>Technical Product Manager</strong> specializing in developer experience, enterprise platform strategy, and SDLC delivery. My work sits at the intersection of engineering teams, business stakeholders, and end-user outcomes.</p>
+        <p>With experience spanning <strong>FINRA</strong> and <strong>Cognizant Technology Solutions</strong>, I've led end-to-end product lifecycles for platforms processing 75B+ daily transactions, serving 12+ Fortune 500 financial services clients.</p>
+        <p>I bring deep fluency in <strong>OKRs, agile delivery, data governance, regulatory compliance</strong>, and the technical vocabulary to partner meaningfully with engineering teams on architecture decisions and SDLC adoption.</p>
+        <p>Currently pursuing my <strong>M.S. in Information Technology</strong> at the University of Denver (GPA: 3.97), with Salesforce, AWS, and GitLab certifications reinforcing my technical edge.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <div class="hi-icon">🎯</div>
+          <div class="hi-text">
+            <strong>Outcome-Driven Roadmaps</strong>
+            <span>OKR-aligned prioritization linking product decisions to measurable business outcomes</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-icon">⚙️</div>
+          <div class="hi-text">
+            <strong>Technical Depth</strong>
+            <span>Deep understanding of technical architecture, SDLC, REST APIs, and engineering economics</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-icon">🏦</div>
+          <div class="hi-text">
+            <strong>Financial Services Expertise</strong>
+            <span>Regulatory compliance, data governance, and operational risk in matrixed enterprise environments</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-icon">👥</div>
+          <div class="hi-text">
+            <strong>Stakeholder Leadership</strong>
+            <span>Cross-functional alignment across engineering, business, and operations at Fortune 500 scale</span>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="hi-icon">🤖</div>
+          <div class="hi-text">
+            <strong>AI-Powered SDLC</strong>
+            <span>Driving AI integration into the software development lifecycle to accelerate developer productivity</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">Experience</div>
+    <h2>Career <em>Timeline</em></h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-meta">
+          <span class="tl-date">May 2025 – Dec 2025</span>
+          <span class="tl-company">FINRA USA · Remote</span>
+        </div>
+        <div class="tl-title">Technical Product Manager — Developer Experience Platform</div>
+        <ul class="tl-bullets">
+          <li>Shaped <strong>outcome-based roadmap</strong> for a developer-facing consumption services platform processing <strong>75B+ daily transactions</strong> — owned end-to-end backlog, prioritized features with agile teams, managed product risk, investment areas, and success measures</li>
+          <li>Defined and tracked <strong>OKR-aligned success metrics</strong> (cost, feature velocity, risk posture, reliability) — established data access, quality, and operational efficiency frameworks; improved metrics tracking <strong>34%</strong> and data access efficiency <strong>32%</strong></li>
+          <li>Drove <strong>SDLC adoption</strong> and AI-powered Software Development Lifecycle — acted as voice of the customer, established KPIs delivering measurable business value; improved cross-functional collaboration <strong>40%</strong></li>
+          <li>Led <strong>Developer Productivity initiative</strong> in support of Enterprise Technology's broader strategy — managed regulatory compliance, operational risk across matrixed stakeholders; improved compliance <strong>34%</strong></li>
+        </ul>
+        <div class="tl-metrics">
+          <span class="metric-chip">+40% Roadmap Delivery</span>
+          <span class="metric-chip">+34% Platform Adoption</span>
+          <span class="metric-chip">75B+ Daily Transactions</span>
+          <span class="metric-chip">AI-powered SDLC</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-meta">
+          <span class="tl-date">Jul 2021 – Aug 2024</span>
+          <span class="tl-company">Cognizant Technology Solutions · Remote</span>
+        </div>
+        <div class="tl-title">Senior Technical Product Manager — Developer &amp; Data Platform</div>
+        <ul class="tl-bullets">
+          <li>Led <strong>end-to-end product lifecycle</strong> for a technical platform serving <strong>12+ Fortune 500</strong> financial services clients — owned backlog and roadmap; drove <strong>84% client adoption within 6 months</strong></li>
+          <li>Owned <strong>OKR/KPI frameworks</strong> — demonstrated deep understanding of product technical architecture and economics of technical investments; improved KPI framework adoption <strong>38%</strong> and data quality <strong>84%</strong></li>
+          <li>Delivered <strong>4 consecutive releases 100% on schedule</strong> — managed SDLC engagement in a highly matrixed organization; improved stakeholder satisfaction <strong>38%</strong></li>
+          <li>Championed developer productivity — applied <strong>service blueprints, story maps, reusability frameworks</strong>, and performance measurement &amp; optimization; improved team performance <strong>37%</strong></li>
+        </ul>
+        <div class="tl-metrics">
+          <span class="metric-chip">84% Client Adoption</span>
+          <span class="metric-chip">4 On-Time Releases</span>
+          <span class="metric-chip">+38% KPI Adoption</span>
+          <span class="metric-chip">+84% Data Quality</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-meta">
+          <span class="tl-date">Jun 2020 – Jul 2021</span>
+          <span class="tl-company">Cognizant Technology Solutions · Remote</span>
+        </div>
+        <div class="tl-title">Associate Product Manager — Technical Platform &amp; CRM</div>
+        <ul class="tl-bullets">
+          <li>Identified through product discovery that <strong>43% of clients</strong> experienced friction in developer service delivery — developed strategy, managed backlog, applied service blueprints and product model system expertise; reduced friction <strong>29%</strong></li>
+          <li>Leveraged Salesforce CRM and analytics tools to generate actionable insights — managed stakeholders across multiple functions; improved analytical insight delivery <strong>22%</strong> and cross-functional coordination <strong>30%</strong></li>
+        </ul>
+        <div class="tl-metrics">
+          <span class="metric-chip">-29% Service Friction</span>
+          <span class="metric-chip">+22% Analytical Insights</span>
+          <span class="metric-chip">+30% Cross-Functional</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Projects</div>
+    <h2>Case <em>Studies</em></h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="proj-tag">Lead Technical PM · 18 Months</div>
+        <div class="proj-title">Developer Experience &amp; Consumption Services Platform</div>
+        <p class="proj-desc">Fragmented developer service delivery, missing backlog management, and absent KPI framework drove low adoption. Led end-to-end platform transformation — built OKR-aligned success metrics tracking cost, risk posture, feature functionality, and reliability.</p>
+        <div class="proj-stack">
+          <span class="stack-pill">Salesforce CRM</span>
+          <span class="stack-pill">REST APIs</span>
+          <span class="stack-pill">Data Analytics</span>
+          <span class="stack-pill">KPI Framework</span>
+          <span class="stack-pill">SDLC</span>
+          <span class="stack-pill">OKRs</span>
+        </div>
+        <div class="proj-results">
+          <div class="res-item"><strong>+44%</strong>&nbsp;Platform Adoption</div>
+          <div class="res-item"><strong>+84%</strong>&nbsp;KPI Adoption</div>
+          <div class="res-item"><strong>+41%</strong>&nbsp;Regulatory Compliance</div>
+          <div class="res-item"><strong>+38%</strong>&nbsp;Developer Experience</div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="proj-tag">PM · 10 Months</div>
+        <div class="proj-title">Technical Portfolio &amp; Data Governance Platform</div>
+        <p class="proj-desc">CRM and developer services lacked data governance frameworks and measurable business value tracking. Led technical platform transformation establishing data access, quality, and operational efficiency frameworks across a matrixed enterprise organization.</p>
+        <div class="proj-stack">
+          <span class="stack-pill">Data Governance</span>
+          <span class="stack-pill">Salesforce CRM</span>
+          <span class="stack-pill">Analytics</span>
+          <span class="stack-pill">KPI Monitoring</span>
+          <span class="stack-pill">Compliance</span>
+        </div>
+        <div class="proj-results">
+          <div class="res-item"><strong>+36%</strong>&nbsp;Data Governance</div>
+          <div class="res-item"><strong>+28%</strong>&nbsp;Compliance</div>
+          <div class="res-item"><strong>+33%</strong>&nbsp;Stakeholder Sat.</div>
+          <div class="res-item"><strong>+100%</strong>&nbsp;Business Value</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">Technical Skills</div>
+    <h2>Capabilities &amp; <em>Expertise</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="sg-title">Product &amp; Platform</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Technical Product Strategy</span>
+          <span class="skill-pill">Roadmap Ownership</span>
+          <span class="skill-pill">Backlog Management</span>
+          <span class="skill-pill">SDLC Lifecycle</span>
+          <span class="skill-pill">Developer Experience</span>
+          <span class="skill-pill">OKRs</span>
+          <span class="skill-pill">Agile / Scrum</span>
+          <span class="skill-pill">Product Discovery</span>
+          <span class="skill-pill">Product Chartering</span>
+          <span class="skill-pill">Story Maps</span>
+          <span class="skill-pill">Service Blueprints</span>
+          <span class="skill-pill">Reusability</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Developer Productivity</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Developer Tooling</span>
+          <span class="skill-pill">Outcome-Based Roadmaps</span>
+          <span class="skill-pill">Speed to Market</span>
+          <span class="skill-pill">Platform Adoption</span>
+          <span class="skill-pill">Scalability &amp; Reliability</span>
+          <span class="skill-pill">Engineering Collaboration</span>
+          <span class="skill-pill">Performance Measurement</span>
+          <span class="skill-pill">AI-powered SDLC</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Data &amp; Analytics</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Data Analytics</span>
+          <span class="skill-pill">Data Governance</span>
+          <span class="skill-pill">Data Quality</span>
+          <span class="skill-pill">KPI Frameworks</span>
+          <span class="skill-pill">Performance Metrics</span>
+          <span class="skill-pill">Technical Architecture</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">Business Intelligence</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Compliance &amp; Risk</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Regulatory Compliance</span>
+          <span class="skill-pill">Operational Risk Mgmt</span>
+          <span class="skill-pill">Risk Posture</span>
+          <span class="skill-pill">Change Management</span>
+          <span class="skill-pill">Business Integration</span>
+          <span class="skill-pill">Matrixed Organizations</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Leadership</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Stakeholder Alignment</span>
+          <span class="skill-pill">Cross-Functional Collab</span>
+          <span class="skill-pill">Coaching &amp; Mentoring</span>
+          <span class="skill-pill">Customer-Centric Delivery</span>
+          <span class="skill-pill">Strategic Planning</span>
+          <span class="skill-pill">Voice of Customer</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="sg-title">Tools &amp; Platforms</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Salesforce CRM</span>
+          <span class="skill-pill">AWS Cloud</span>
+          <span class="skill-pill">GitLab CI/CD</span>
+          <span class="skill-pill">Jira</span>
+          <span class="skill-pill">Confluence</span>
+          <span class="skill-pill">Pega</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="education-certs">
+  <div class="container">
+    <!-- Education -->
+    <div style="margin-top: 0;">
+      <div class="section-label">Education</div>
+      <h2>Academic <em>Background</em></h2>
+      <div class="edu-grid" style="margin-top: 2rem;">
+        <div class="edu-card">
+          <div class="edu-degree">Master of Science — Information Technology</div>
+          <div class="edu-school">University of Denver</div>
+          <div class="edu-meta">Aug 2024 – May 2026 · Denver, CO</div>
+          <div class="edu-gpa">GPA 3.97 / 4.0</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Engineering — Computer Science</div>
+          <div class="edu-school">Anna University</div>
+          <div class="edu-meta">Aug 2017 – May 2021</div>
+          <div class="edu-gpa">GPA 3.8 / 4.0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label" style="justify-content: center;">Contact</div>
+    <h2>Let's <em>Connect</em></h2>
+    <p class="contact-sub">Open to Technical PM roles focused on Developer Experience, Enterprise Platform, and SDLC delivery. Based in Hopkins, MN.</p>
+    <div class="contact-links">
+      <a href="mailto:kiruthikavenkat2704@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        kiruthikavenkat2704@gmail.com
+      </a>
+      <a href="tel:+17208135590" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        (+1) 720-813-5590
+      </a>
+
+
+    </div>
+    <a href="#hero" class="btn-primary" style="margin: 0 auto; display: inline-flex;">Back to Top ↑</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    Kiruthika Venkatesan · Technical Product Manager · Hopkins, MN · <span>kiruthikavenkat2704@gmail.com</span>
+  </div>
+</footer>
+
+<script>
+  // ── COUNTER ANIMATION ──
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const duration = 1800;
+    const start = performance.now();
+    const update = (now) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  }
+
+  // ── INTERSECTION OBSERVER ──
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // trigger counters
+        entry.target.querySelectorAll('[data-target]').forEach(animateCounter);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.tl-item, .project-card, .skill-group').forEach(el => io.observe(el));
+
+  // Trigger hero counters immediately
+  setTimeout(() => {
+    document.querySelectorAll('.hero-stats [data-target]').forEach(animateCounter);
+  }, 600);
+
+  // ── STAGGER DELAYS ──
+  document.querySelectorAll('.project-card').forEach((c, i) => c.style.transitionDelay = `${i * 0.12}s`);
+  document.querySelectorAll('.skill-group').forEach((c, i) => c.style.transitionDelay = `${i * 0.08}s`);
+  document.querySelectorAll('.tl-item').forEach((c, i) => c.style.transitionDelay = `${i * 0.15}s`);
+
+  // ── ACTIVE NAV ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
